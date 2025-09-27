@@ -113,3 +113,16 @@ export const fetchMovies = async ({
   const responseJson: MovieSearchResponse = await response.json();
   return responseJson.titles;
 };
+
+export const fetchMovieItem = async ({
+  id,
+}: {
+  id: string;
+}): Promise<Movie> => {
+  const response = await fetch(`${IMDB_API_CONFIG.base_url}/titles/${id}`);
+  if (!response.ok) {
+    throw new Error(`failed to fetch movie item: ${response.statusText}`);
+  }
+  const responseJson: Movie = await response.json();
+  return responseJson;
+};

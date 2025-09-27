@@ -10,7 +10,7 @@ function TabIcon({ focused, activeName, inactiveName }: any) {
         colors={["#FFB800", "#FF8A00"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        className="flex flex-row flex-1 h-[40px] w-[40px] min-h-[40px] mt-4 justify-center items-center rounded-full overflow-hidden"
+        className="flex flex-row flex-1 h-[40px] w-[130px] min-h-[40px] mt-4 justify-center items-center rounded-full overflow-hidden"
       >
         <Ionicons name={activeName} size={20} color="#151312" />
       </LinearGradient>
