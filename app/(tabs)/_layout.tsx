@@ -1,33 +1,82 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { LinearGradient } from "expo-linear-gradient";
+import { Tabs } from "expo-router";
+import { View } from "react-native";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+function TabIcon({ focused, activeName, inactiveName }: any) {
+  if (focused) {
+    return (
+      <LinearGradient
+        colors={["#FFB800", "#FF8A00"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        className="flex flex-row flex-1 h-[40px] w-[40px] min-h-[40px] mt-4 justify-center items-center rounded-full overflow-hidden"
+      >
+        <Ionicons name={activeName} size={20} color="#151312" />
+      </LinearGradient>
+    );
+  }
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  return (
+    <View className="size-full justify-center items-center mt-4 rounded-full">
+      <Ionicons name={inactiveName} size={20} color="#8D8BA7" />
+    </View>
+  );
+}
 
+export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarShowLabel: false,
+        tabBarItemStyle: {
+          width: "100%",
+          height: 50,
+          justifyContent: "center",
+          alignItems: "center",
+        },
+        tabBarStyle: {
+          backgroundColor: "#0F0D23",
+          borderRadius: 50,
+          marginHorizontal: 20,
+          marginBottom: 36,
+          height: 52,
+          position: "absolute",
+          overflow: "hidden",
+          borderWidth: 1,
+          borderColor: "#0F0D23",
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "index",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon
+              focused={focused}
+              activeName="home"
+              inactiveName="home-outline"
+              title="Home"
+            />
+          ),
         }}
       />
+
       <Tabs.Screen
-        name="explore"
+        name="saved"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Save",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon
+              focused={focused}
+              activeName="bookmark"
+              inactiveName="bookmark-outline"
+              title="Save"
+            />
+          ),
         }}
       />
     </Tabs>
